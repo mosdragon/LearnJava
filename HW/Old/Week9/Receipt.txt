@@ -1,0 +1,11 @@
+Grocery Store Receipt
+
+Here are your purchases:
+Red Apples @ $2.00 per pound
+	x1 = $2.00
+Some Soup @ $5.00 per can, buy 2 get 1 free
+	x60 = $200.00
+
+Total = $202.00
+
+Thank You!

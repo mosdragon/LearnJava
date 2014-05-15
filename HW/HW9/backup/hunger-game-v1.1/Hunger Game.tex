@@ -1,0 +1,283 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{times}
+\usepackage{amsmath,amsthm, amssymb, latexsym}
+\usepackage[abbr]{harvard}
+\usepackage{hyperref}
+
+\hypersetup{urlcolor=cyan}
+
+\usepackage{listings}
+
+
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+% Default settings for code listings
+\lstset{frame=tb,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  %columns=flexible,
+  basicstyle={\scriptsize\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  frame=single,
+  breaklines=true,
+  breakatwhitespace=true
+}
+
+
+\textwidth = 6.5 in
+\textheight = 9.5 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = -0.5 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.0in
+\parindent = 0.0in
+
+%% Much nicer links than vanilla \href
+\newcommand{\link}[2]{\href{#1}{\textcolor{blue}{\underline{#2}}} }
+
+\newcommand{\codeconventions}{\link{http://www.cc.gatech.edu/~simpkins/teaching/gatech/cs1331/guides/cs1331-code-conventions.html}{CS 1331 Code Conventions}}
+\newcommand{\checkstylejar}{\link{http://www.cc.gatech.edu/~simpkins/teaching/gatech/cs1331/guides/checkstyle-5.6-all.jar}{Checkstyle jar}}
+\newcommand{\checkstyleconfig}[0]{\link{http://www.cc.gatech.edu/~simpkins/teaching/gatech/cs1331/guides/cs1331-checkstyle.xml}{configuration}}
+\newcommand{\codehint}[2]{\item {\tt #1} \begin{itemize} \item #2 \end{itemize}}
+
+
+\title{Hunger Game}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+This project will give you practice with Swing.
+
+\section{Problem Description}
+
+Hunger Game is a video game where the player is lost in a forest and is extremely hungry.  In order to not die of starvation, the player must hunt Animals.  While Edible Animals are very nutritious, EndangeredSpecies are not very nutritious and are illegal to hunt.  If the player kills too many EndangeredSpecies, the game will end with the player being arrested.  As time goes on, the player's hunger increases.  The player will die of starvation when the Hunger bar fills up.
+
+\section{Solution Description}
+
+Due to how involved this assignment is, you have been provided with a lot of skeleton code. This is to simulate how coding is often done in the real world, as you are rarely able to start a brand new project from scratch. Often, there is a substantial code base already written which you must interface with.
+Using the provided Javadocs to understand the code that has been given to you, finish writing the game as described above.  A lot of the logic is provided, so you will mostly be dealing with Swing.
+
+\newpage
+
+\subsection{{\tt Animal Class}}
+
+The abstract {\tt Animal} class represents animals.  All concrete Animal classes should extend this class. All Animals have a Home and most of the time they tend to hide there.  Every once in a while Animals get brave and go out for a walk.  Each Animal has a maximum distance that it is confortable being from its home.
+This distance is a randomly generated int from 150 to 500 meters (inclusive).
+
+
+\subsection{{\tt Boar}}
+
+The {\tt Boar} class represents a wild boar.  It is a concrete Edible Animal.
+
+
+\subsection{{\tt Panda}}
+
+The {\tt Panda} class represents a Panda.  It is a concrete EndangeredSpecies Animal.
+
+\subsection{{\tt EndangeredSpecies}}
+
+The {\tt EndangeredSpecies} interface is implemented by all EndangeredSpecies.
+
+\subsection{{\tt Edible}}
+
+The {\tt Edible} interface is implemented by all other Animals.  Edibles are much more nutritious than EndangeredSpecies and they don't get you arrested for eating them.
+
+
+\subsection{{\tt Your Classes}}
+
+The only complete classes that you must write are:
+\begin{enumerate}
+    \item At LEAST ONE of your very own concrete Edible Animal.
+    \item At LEAST ONE of your very own concrete EndangeredSpecies Animal
+    \end{enumerate}
+The game will be more effective if you use icons without backgrounds.
+
+\subsection{{\tt Home}}
+
+The {\tt Home} class is where Animals are born and live.  Homes have a location.
+
+\subsection{{\tt Direction}}
+
+The {\tt Direction} enum represents two directions: out and in.  An Animal has a Direction in which it is moving.
+
+\subsection{{\tt Nature}}
+
+The {\tt Nature} class is a singleton class.  This means that there is only ever one instance of Nature.  You have used singletons before (NumberFormat has a getCurrencyInstance() that returns its sole instance).  Nature has a getInstance() method that returns its sole instance.
+Nature uses Vectors instead of ArrayLists because Vectors are thread safe.  For the purpose of this project, just assume they are ArrayLists.
+The Vectors are as follows:
+\begin{enumerate}
+    \item {\bf {existingAnimals}}:  all of the Animals in the forest.
+    \item {\bf {homes}}:  all of the homes in the forest.
+    \item {\bf {chosenOnes}}:  all of the Animals that have become brave enough to wander off into the forest.
+    \end{enumerate}
+Every time the player shoots, Nature is in charge of checking to see if the wandering Animals were within the scope of the shot.  If they are, they are removed from all vectors and return the food points or wanted level of the animals.
+Nature uses factory methods to populate the forest.
+\begin{enumerate}
+    \item {\bf {createAnimal(Class, Home)}}: creates an Animal of a specific class and assigns it to a specific Home.
+    \item {\bf {createAnimal(Home)}}: creates a random Animal and assigns it a specific Home.
+    \item {\bf {createEdible(Home)}}: creates a random Edible and assigns it a specific Home.
+    \item {\bf {createEndangered(Home)}}: creates a random EndangeredSpecies and assigns it a specific Home.
+    \end{enumerate}
+
+Nature has 3 Class arrays:
+\begin{enumerate}
+    \item {\bf {animals}}:
+    \item {\bf {edibles}}
+    \item {\bf {endangered}}
+    \end{enumerate}
+Don't worry too much about what these do, just make sure that you add your classes to the appropriate arrays.
+
+The motivate() method is what motivates the chosen animals to move.
+
+\subsection{{\tt Drawable}}
+
+The {\tt Drawable} interface is implemented by all classes that can be drawn (have a graphical representation).
+Classes that must implement {\tt Drawable}:
+\begin{enumerate}
+    \item {\bf {Animal}}
+    \item {\bf {Home}}
+    \item {\bf {Nature}}
+    \end{enumerate}
+You must make sure all of these classes actually implement Drawable.
+
+
+\subsection{{\tt GamePanel}}
+The {\tt GamePanel} class is in charge of all the game logic.  The game runs on a Timer.  Every tick of the timer, the TimerListener will execute the code in its actionPerformed method.  This is what must be done every tick:
+\begin{enumerate}
+    \item The hunger must be increased by -1.
+    \item The appropriate Animals should move.
+    \item The Panel must be painted using the paintComponent(Graphics) method.
+    \item You must  check to see if the player has been arrested.  If so, you must stop the timer and show a message dialog saying that you've been arrested.
+    \item You must check to see if the player has died.  If so, you must stop the timer and show a message dialog saying that you have died of starvation.
+    \end{enumerate}
+
+The GamePanel also has a MouseAdapter.  This has three methods: mouseMoved(MouseEvent m), mouseClicked(MouseEvent m), and mouseExited(MouseEvent m).
+mouseClicked(MouseEvent m) and mouseExcited(MouseEvent m) have been provided. You must fill in the mouseMoved(MouseEvent m) method.
+
+Every time the mouse is moved you must ensure that:
+\begin{enumerate}
+    \item The Panel is painted using the paintComponent(Graphics) method.
+    \item The lastMouse member variable is updated with the new mouse Point.
+    \item The crossHairs should be drawn on the GamePanel's graphics.  In order to draw the image at the right location you must use the upperLeft() static method in GamePanel.
+    \end{enumerate}
+
+You must complete the shoot(Rectangle).  It must perform the following operations:
+\begin{enumerate}
+    \item Increase the hunger with whatever is returned by Nature's shootFood(Rectangle) method.
+    \item Increase the wanted level with whatever is returned by Nature's shootEndangered(Rectangle) method.
+    \item Increase the hunger with the same wanted points that was returned by the shootEndangered(Rectangle) method.
+    \end{enumerate}
+Make sure that Nature's shootFood(Rectangle) and shootEndangered(Rectangle) methods are called only once in this method.
+You must also fill in a few lines of code in GamePanel's constructor.
+
+\subsection{{\tt ControlPanel}}
+
+ControlPanel should have a height of 75, and use a BorderLayout.
+ControlPanel has two ProgressBars: hungerBar and wantedBar.
+The hungerBar must be added to the left side of the panel and the wantedBar must be added to the right side of the panel.
+The addButtonCenter(JButton) is used to add a button to the middle of the ControlPanel.  This method is called by the GamePanel to add the play/pause button to the middle of its ControlPanel.  You must complete this method.
+
+\subsection{{\tt HungerGame}}
+
+The {\tt HungerGame} class is provided.  It is the Driver class of the game.
+
+\newpage
+
+
+\section{Checkstyle}
+
+Review the \codeconventions and download the \checkstylejar file and the \checkstyleconfig file to the directory that contains your Java source files.  Run Checkstyle on your code like this (in the directory containing all your Java source files):
+
+\begin{lstlisting}[language=bash]
+$ java -jar checkstyle-5.6-all.jar -c cs1331-checkstyle.xml *.java
+Starting audit...
+Audit done.
+\end{lstlisting}
+The message above means there were no Checkstyle errors.  You can easily count the errors by piping the output of Checkstyle through {\tt grep}.
+
+\begin{lstlisting}[language=bash]
+$ java -jar checkstyle-5.6-all.jar -c cs1331-checkstyle.xml *.java | grep -cEv "(Starting audit...|Audit done)"
+0
+$
+\end{lstlisting}
+
+The {\tt -c} option tells {\tt grep} to count matching lines instead of printing them, {\tt E} means use {\tt egrep} (extended {\tt grep}) syntax, and {\tt v} means invert the match.  Here we use an inverted match to discard the two non-error lines of Checkstyle's output.  If you have {\tt egrep} you could leave off the {\tt -E} and just use {\tt egrep}.
+
+\begin{lstlisting}[language=bash]
+$ java -jar checkstyle-5.6-all.jar -c cs1331-checkstyle.xml *.java | egrep -cv "(Starting audit...|Audit done)"
+0
+$
+\end{lstlisting}
+
+Alternatively, if you are Windows, you can use this command to count the number of style errors by piping output through the {\tt findstr} program.
+
+\begin{lstlisting}[language=bash]
+C:\textbackslash > java -jar checkstyle-5.6-all.jar -c cs1331-checkstyle.xml *.java |findstr /v "Starting audit..." | findstr /v "Audit done" | find /c /v "!!!!!"
+\end{lstlisting}
+The Java source files we provide contain no \link{http://checkstyle.sourceforge.net/}{Checkstyle} errors.  You are responsible for any \link{http://checkstyle.sourceforge.net/}{Checkstyle} errors you introduce when modifying these files.
+Be warned --- the Checkstyle cap from this homework onward is 100. Yes, this means you can receive 0s for perfectly functional code if it is messy enough. Don't make this mistake! Run Checkstyle early and often.
+\section{Tips}
+
+\begin{itemize}
+    \item Before you even start coding, read through all of the provided documentation and files. ALL OF IT.
+    \item Draw out a diagram of how the provided files interact with each other on paper.
+    \item Think about how the classes you'll be filling out need to interact with one another. Much of what you'll be writing will be calling other methods that are already written or methods which need to be filled out as well.
+    \item The Java API will help you out significantly on this homework, particularly regarding the intricacies of various Layout managers and Swing components.
+\end{itemize}
+\section{Turn-in Procedure}
+Submit all of the Java source files your project uses to T-Square in addition to any images it requires. Yes, this includes the images provided to you. Do not submit any compiled bytecode ({\tt .class} files), the \href{http://checkstyle.sourceforge.net/}{Checkstyle} jar file, or the {\tt cs1331-checkstyle.xml} file.  When you're ready, double-check that you have submitted and not just saved a draft.
+These files should include (but are not limited to):
+\begin{enumerate}
+    \item {\tt Animal.java}
+    \item {\tt Boar.java}
+    \item {\tt ControlPanel.java}
+    \item {\tt Direction.java}
+    \item {\tt Drawable.java}
+    \item {\tt Edible.java}
+    \item {\tt EndangeredSpecies.java}
+    \item {\tt GamePanel.java}
+    \item {\tt Home.java}
+    \item {\tt HungerGame.java}
+    \item {\tt Nature.java}
+    \item {\tt Pand.java}
+    \item {\tt YourEdible.java} (any class name)
+    \item {\tt YourEndangeredSpecies.java} (any class name)
+    \item all of the image files provided as well as any aditional image files needed in your own classes.
+
+\end{enumerate}
+\newpage
+\section{Verify the Success of Your Submission to T-Square}
+
+Practice safe submission! Verify that your HW files were truly submitted correctly, the upload was successful, and that the files compile and run. It is solely your responsibility to turn in your homework and practice this safe submission safeguard.
+
+\begin{enumerate}
+    \item After uploading the files to T-Square you should receive an email from T-Square listing the names of the files that were uploaded and received. If you do not get the confirmation email almost immediately, something is wrong with your HW submission and/or your email. Even receiving the email does not guarantee that you turned in exactly what you intended.
+    \item After submitting the files to T-Square, return to the Assignment menu option and this homework. It should show the submitted files.
+    \item Download copies of your submitted files from the T-Square Assignment page placing them in a new folder.
+    \item Recompile and test those exact files.
+    \item This helps guard against a few things.
+    \begin{enumerate}
+        \item It helps insure that you turn in the correct files.
+        \item It helps you realize if you omit a file or files.\footnote{Missing files will not be given any credit, and non-compiling homework solutions will receive few to zero points. Also recall that late homework will not be accepted regardless of excuse. Treat the due date with respect. The real due date is midnight Wednesday. Do not wait until the last minute!}
+        (If you do discover that you omitted a file, submit all of your files again, not just the missing one.)
+        \item Helps find last minute causes of files not compiling and/or running.
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}

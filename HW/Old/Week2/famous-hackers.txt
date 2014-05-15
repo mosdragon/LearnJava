@@ -1,0 +1,39 @@
+John McCarthy
+John Backus
+Dennis Ritchie
+Brian Kernighan
+Guy Steele
+Niklaus Wirth
+Robin Milner
+Paul Hudak
+James Godsling
+Larry Wall
+Guido Van Rossum
+Martin Odersky
+Richard Stallman
+Ken Thompson
+Rob Pike
+Linus Torvalds
+Marc Andreessen
+Brad Cox
+John Ousterhout
+Dan Bricklin
+John Carmack
+Donald Knuth
+Leslie Lamport
+Alan Kay
+Tony Hoare
+Rich Hickey
+Philip Wadler
+Simon Peyton Jones
+Alan Cox
+Joshua Bloch
+Bill Joy
+Tim Berners-Lee
+Paul Graham
+David Heinemeier Hanson
+Grace Hopper
+John Kemeny
+Ada Lovelace
+Yukihiro Matsumoto
+Bertrand Meyer

@@ -1,0 +1,56 @@
+                           
+                           Questions:
+
+
+1. Determine whether the following statements are true or false
+   (Assume that total = 10 and num = 5)
+
+    a. num >= 5 && total==20
+      Answer: false, since total==20 is false.
+      
+    b. (num==0) || (total/num) >2
+      Answer: false, since both conditions are false.
+      
+    c. num != total && total>1
+      Answer: true, since both conditions evaluate to true.
+      
+    d. num==total || total >5 && total <15
+      Just for clarity, I'm going to outline what happens here:
+      1)num==total evaluates to false. Since the first condition is false,
+        the computer can't take advantage of short-circuit evaluation and must
+        check the next condition (total >5 && total <15).
+      2)total >5 evaluates to true.
+      3)total <15 evaluates to true.
+      4)Since the two conditions are true, total >5 && total<15 evaluates to
+        true.
+      5)Since total >5 && total<15 is true, num==total || total >5 && total <15
+        is also true.
+      Answer: true.
+      
+2. Write a statement that prints out “Hot” if x is greater than or equal to
+   70, and “Cold” if x is less than or equal to 40. If x is between the two,
+   it should print “Not too bad”, and if x is negative, it should also print
+   “Way too cold”.
+
+    Answer:
+    
+    if(x >= 70){
+        System.out.println("Hot");
+    } else if(x >= 40){
+        System.out.println("Not too bad");
+    } else{
+        System.out.println("Cold");
+        if(x < 0){
+            System.out.println("Way too cold");
+        }
+    }
+   
+   Note: There are other ways to do this correctly, but this way is pretty
+   concise and simplifies the computer's job by using logic to remove
+   extraneous checking.
+   
+3. The current conversion rate between Dollar and the Euro is 1 Dollar = .76 
+   Euros. Keeping this in mind, write a simple program that prompts the user
+   for a dollar amount and displays that same amount of money in Euros.
+   
+   Answer: See file named "CodingAnswers.java"

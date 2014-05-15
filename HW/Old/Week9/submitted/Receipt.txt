@@ -1,0 +1,11 @@
+Grocery Store Receipt
+
+Here are your purchases:
+Admiral Crunch Cereal @ $4.00 per box
+	x4 = $16.00
+Some Soup @ $5.00 per can, buy 2 get 1 free
+	x60 = $200.00
+
+Total = $216.00
+
+Thank You!
